@@ -1,0 +1,43 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="card header">
+  <header>
+    <div align="center">
+      <h2 style="color:goldenrod">Welcome to TestApp</h2>
+    </div>
+  </header>
+</div>
+<div *ngIf="name" class="card bg-primary text-white container">
+  <nav class="navbar navbar-expand-sm bg-primary navbar-light">
+    <ul class="navbar-nav">
+      <li>
+        <div class="dropdown ">
+          <button class="dropbtn bg-primary">
+            <img src="{{userLogin.picture}}" width="30px" height="30px" />{{userLogin.userName}}!
+          </button>
+          <div class="dropdown-content bg-success">
+            <p class="card-text" [(ngModel)]="userLogin.email"> Email : {{userLogin.email}}</p>
+            <p class="card-text" [(ngModel)]="userLogin.familyName"> Surname: {{userLogin.familyName}}</p>
+            <p class="card-text" [(ngModel)]="userLogin.givenName"> Name: {{userLogin.givenName}}</p>
+          </div>
+        </div>
+
+      </li>
+      <li><button style="margin-left:20px;color:white;border: 0;cursor: pointer;" class="nav-item nav-link bg-primary"
+          routerLink="/add">AddUser</button></li>
+      <li><button style="margin-left:20px;color:white;border: 0;cursor: pointer;" class="nav-item nav-link bg-primary"
+          routerLink="/getAll">ListUsers</button></li>
+    </ul>
+    <div class="navbar-nav">
+      <button style="margin-left:20px;color:white;border: 0;cursor: pointer;" class="nav-item nav-link bg-primary"
+        (click)="logout()">Logout</button>
+    </div>
+  </nav>
+</div>
+<div *ngIf="!name" class="container">
+  <button class="btn btn-block btn-social btn-google" (click)="login()"><span class="fa fa-google"></span> Sign in
+    with Google</button>
+</div>
+
+<body>
+  <router-outlet></router-outlet>
+</body>

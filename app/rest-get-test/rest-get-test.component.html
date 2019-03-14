@@ -1,0 +1,93 @@
+<div class="card bg-light text-dark container">
+  <div *ngIf="!click">
+    <h3 style="text-align: center;color:forestgreen;">User Details</h3>
+    <table class="table table-striped table-responsive">
+      <div *ngIf="!users">
+        <h5>Users Details not found</h5>
+      </div>
+      <div *ngIf="users">
+        <thead>
+          <tr>
+            <th class="hidden">ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DateOfBirth</th>
+            <th>Email</th>
+            <th>MobileNumber</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of users">
+            <td class="hidden">{{u.id}}</td>
+            <td>{{u.firstName}}</td>
+            <td>{{u.lastName}}</td>
+            <td>{{u.dob}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.number}}</td>
+            <td>
+              <button style="margin-right: 16px" class="btn btn-danger" (click)="deleteUser(u)">Delete</button>
+              <button class="btn btn-warning" (click)="editUser(u)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </div>
+    </table>
+  </div>
+  <div *ngIf="click">
+    <form (ngSubmit)="editUsers()">
+      <fieldset>
+        <legend>
+          <h2 class="text-center">EditUser</h2>
+        </legend>
+
+        <div class="form-group">
+          <label for="id">ID:</label>
+          <input [(ngModel)]="user.id" name="id" class="form-control" id="id" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input [(ngModel)]="user.firstName" placeholder="First Name" name="firstName" class="form-control"
+            id="firstName">
+          <div *ngIf="firstNameError">
+            <p style="color:red;">{{firstNameError}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input [(ngModel)]="user.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+          <p style="color:red;">{{lastNameError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date Of Birth:</label>
+          <input type="date" [(ngModel)]="user.dob" placeholder="date" name="dob" class="form-control" id="dob">
+          <p style="color:red;">{{dobError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address:</label>
+          <input type="email" [(ngModel)]="user.email" placeholder="Email" name="email" class="form-control" id="email">
+          <p style="color:red;">{{emailError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="number">Phone Number:</label>
+          <input type="number" [(ngModel)]="user.number" placeholder="MobileNumber" name="number" class="form-control"
+            id="number">
+          <p style="color:red;">{{numberError}}</p>
+        </div>
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="user.userEmail" name="userEmail" class="form-control" id="userEmail"
+            readonly>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Update</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<div class="card-footer bg-info text-white container">{{response.text}}</div>

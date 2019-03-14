@@ -1,0 +1,57 @@
+<div *ngIf="givenName">
+  <div class="card bg-light text-dark container">
+    <form (ngSubmit)="createUser()">
+      <fieldset>
+        <legend>
+          <h2 class="text-center">Add User</h2>
+        </legend>
+
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input [(ngModel)]="user.firstName" placeholder="First Name" name="firstName" class="form-control"
+            id="firstName">
+          <div *ngIf="firstNameError">
+            <p style="color:red;">{{firstNameError}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input [(ngModel)]="user.lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+          <p style="color:red;">{{lastNameError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date Of Birth:</label>
+          <input type="date" [(ngModel)]="user.dob" placeholder="date" name="dob" class="form-control" id="dob">
+          <p style="color:red;">{{dobError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address:</label>
+          <input type="email" [(ngModel)]="user.email" placeholder="Email" name="email" class="form-control" id="email">
+          <p style="color:red;">{{emailError}}</p>
+        </div>
+
+        <div class="form-group">
+          <label for="number">Phone Number:</label>
+          <input type="number" [(ngModel)]="user.number" placeholder="MobileNumber" name="number" class="form-control"
+            id="number">
+          <p style="color:red;">{{numberError}}</p>
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" [(ngModel)]="user.userEmail" name="userEmail" class="form-control" id="userEmail"
+            readonly>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Create</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div *ngIf="!responseText" class="card-footer bg-info text-white container">Something went wrong..Details not saved..
+  </div>
+  <div *ngIf="responseText" class="card-footer bg-info text-white container">{{response.text}}</div>
+</div>
